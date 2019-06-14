@@ -1,0 +1,263 @@
+# Copyright (C) 2019 Jesper Wallin
+# This file is distributed under the same license as the WooCommerce CSC plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce CSC 1.0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-csc\n"
+"POT-Creation-Date: 2019-03-17T19:58:11+00:00\n"
+"PO-Revision-Date: 2019-03-27 15:52+0100\n"
+"Last-Translator: \n"
+"Language-Team: Jens Twesmann - j.twesmann@star-media.biz\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"X-Domain: wc-gateway-csc\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Plugin Name of the plugin
+msgid "WooCommerce CSC"
+msgstr "WooCommerce CSC"
+
+#. Plugin URI of the plugin
+msgid "http://github.com/empatogen/woocommerce-csc"
+msgstr "http://github.com/empatogen/woocommerce-csc"
+
+#. Description of the plugin
+msgid ""
+"A payment gateway for WooCommerce to accept <a href=\"https://ripple.com/csc"
+"\">CSC</a> payments."
+msgstr ""
+"Zahlungsart für WooCommerce um <a href=\"https://ripple.com/csc\">CSC</a> "
+"Zahlungen zu akzeptieren."
+
+#. Author of the plugin
+msgid "Jesper Wallin"
+msgstr "Jesper Wallin"
+
+#. Author URI of the plugin
+msgid "https://ifconfig.se/"
+msgstr "https://ifconfig.se/"
+
+#: woocommerce-csc.php:60 woocommerce-csc.php:199
+msgid "CSC"
+msgstr "CSC"
+
+#: woocommerce-csc.php:61
+msgid "Let your customers pay using the CSC Ledger."
+msgstr "Erlaube deinen Kunden die Bezahlung über den CSC Ledger."
+
+#: woocommerce-csc.php:99
+msgid ""
+"<div class=\"notice notice-error\"><p><b>WooCommerce CSC</b> does not "
+"support the <b>currency</b> your shop is using.</p></div>"
+msgstr ""
+"<div class=\"notice notice-error\"><p><b>WooCommerce CSC</b> unterstützt die "
+"<b>Währung</b> deines Shops leider nicht.</p></div>"
+
+#: woocommerce-csc.php:107
+msgid ""
+"<div class=\"notice notice-error\"><p><b>WooCommerce CSC</b> requires you to "
+"specify a <b>CSC Account</b> and your <b>CSCL Webhook</b> details.</p></div>"
+msgstr ""
+"<div class=\"notice notice-error\"><p><b>WooCommerce CSC</b> benötigt "
+"ein<b>CSC Account</b> und deine <b>CSCL Webhook</b> Daten.</p></div>"
+
+#: woocommerce-csc.php:115
+msgid ""
+"<div class=\"notice notice-error\"><p>The specified <b>CSC Account</b> and/"
+"or <b>CSCL Webhook</b> details are invalid. Please correct these for "
+"<b>WooCommerce CSC</b> to work properly.</p></div>"
+msgstr ""
+"<div class=\"notice notice-error\"><p> Die angegebenen <b>CSC Account</b> "
+"und/oder <b>CSCL Webhook Details</b> sind nicht korrekt. Bitte korrigiere "
+"diese um die <b>Zahlungsart CSC</b> korrekt anbieten zu können.</p></div>"
+
+#: woocommerce-csc.php:189
+msgid "Enable/Disable"
+msgstr "Aktivieren/Deaktivieren"
+
+#: woocommerce-csc.php:191
+msgid "Enable CSC Payments"
+msgstr "Aktiviere CSC Zahlungen"
+
+#: woocommerce-csc.php:196
+msgid "Title"
+msgstr "Titel"
+
+#: woocommerce-csc.php:198
+msgid ""
+"This controls the title for the payment method the customer sees during "
+"checkout."
+msgstr ""
+"Gib den Titel für die Zahlungsmethode an. Diesen sieht der Kunde beim "
+"Checkout."
+
+#: woocommerce-csc.php:204
+msgid "Description"
+msgstr "Beschreibung"
+
+#: woocommerce-csc.php:206
+msgid "Payment method description that the customer will see on your checkout."
+msgstr "Diese Beschreibung sieht der Kunde beim Checkout."
+
+#: woocommerce-csc.php:207
+msgid "Payment instruction will be shown once you've placed your order."
+msgstr ""
+"Die Beschreibung wird angezeigt sobald die Bestellung abgesendet wurde."
+
+#: woocommerce-csc.php:212 woocommerce-csc.php:218 woocommerce-csc.php:505
+msgid "CSC Account"
+msgstr "CSC Account"
+
+#: woocommerce-csc.php:214
+msgid ""
+"Please specify the CSC Ledger account where your payments should be sent. "
+"This should be an account <b>YOU</b> own and should <b>NOT</b> be an "
+"exchange account, since a unique destination tag is generated for each order."
+msgstr ""
+"Bitte den CSC Account angeben der die Zahlungen erhalten soll. Diesen "
+"Account solltest <b>DU</b> besitzen und sollte <b>KEIN</b> Account bei einer "
+"Kryptobörse sein, da für jede Bestellung eine eigenständiger Destination Tag "
+"erstellt wird."
+
+#: woocommerce-csc.php:220
+msgid "Your CSC account where payments should be sent."
+msgstr "Dieser CSC Account erhält die Zahlungen."
+
+#: woocommerce-csc.php:226
+msgid "CSCL Webhook options"
+msgstr "CSCL Webhook Optionen"
+
+#: woocommerce-csc.php:228
+msgid ""
+"In order to create your webhook and process your payments properly, please "
+"specify your CSCL Webhooks API key. For more informations how to obtain "
+"these keys, please visit <a href=\"https://webhook.cscayments.co/\">https://"
+"webhook.cscayments.co</a>."
+msgstr ""
+"Damit der Prozess und die CSCL Webhooks korrekt funktionieren gebe bitte "
+"deinen API Key ein. Für weitere Informationen besuche bitte: <a href="
+"\"https://webhook.cscayments.co/\"> https://webhook.cscayments.co </a>."
+
+#: woocommerce-csc.php:232
+msgid "API Key"
+msgstr "API Key"
+
+#: woocommerce-csc.php:234
+msgid "Your CSCL CSCayments Webhook API key."
+msgstr "Dein CSCL CSCayments Webhook API Key."
+
+#: woocommerce-csc.php:240
+msgid "API Secret"
+msgstr "API Secret"
+
+#: woocommerce-csc.php:242
+msgid "Your CSCL CSCayments Webhook API secret."
+msgstr "Dein CSCL CSCayments Webhook API Secret."
+
+#: woocommerce-csc.php:248
+msgid "Advanced"
+msgstr "Fortgeschritten"
+
+#: woocommerce-csc.php:250
+msgid "Leave these untouched unless you really know what you're doing."
+msgstr "Belasse diese Einstellungen, es sei denn du weißt genau was du tust."
+
+#: woocommerce-csc.php:254
+msgid "CSC Node"
+msgstr "CSC Node"
+
+#: woocommerce-csc.php:256
+msgid "Which CSC node to use when checking our balance."
+msgstr "Welcher CSC Node soll zur Abfrage deines Kontos verwendet werden."
+
+#: woocommerce-csc.php:263
+msgid "Bypass firewall"
+msgstr "Firewall umgehen"
+
+#: woocommerce-csc.php:265
+msgid "Use a proxy to bypass your webservers firewall."
+msgstr "Nutze einen Proxy um die Firewall deines Webservers zu umgehen."
+
+#: woocommerce-csc.php:272
+msgid "Exchange"
+msgstr "Kryptobörse"
+
+#: woocommerce-csc.php:274
+msgid "Which exchange to use when fetching the CSC rate."
+msgstr ""
+"Welche Kryptobörse soll zur Ermittlung des Wechselkurses genutzt werden."
+
+#: woocommerce-csc.php:290
+msgid "Transaction Limit"
+msgstr "Transaktionslimit"
+
+#: woocommerce-csc.php:292
+msgid ""
+"The number of transactions to fetch from the ledger each time we check for "
+"new payments."
+msgstr ""
+"Anzahl der abzurufenden Transaktionen vom CSCL bei jedem check neuer "
+"Zahlungen."
+
+#: woocommerce-csc.php:496
+msgid "CSC payment details"
+msgstr "CSC Zahlungsdetails"
+
+#: woocommerce-csc.php:509
+msgid "Destination tag"
+msgstr "Destination tag"
+
+#: woocommerce-csc.php:513
+msgid "CSC total"
+msgstr "Gesamt CSC"
+
+#: woocommerce-csc.php:517
+msgid "CSC received"
+msgstr "CSC erhalten"
+
+#: woocommerce-csc.php:521
+msgid "CSC left to pay"
+msgstr "CSC nach zu zahlen"
+
+#: woocommerce-csc.php:525
+msgid "Order status"
+msgstr "Bestellstatus"
+
+#: class-wccsc-helpers.php:14
+msgid "Pending payment"
+msgstr "Zahlung ausstehend"
+
+#: class-wccsc-helpers.php:16
+msgid "Processing (Paid)"
+msgstr "In Bearbeitung (bezahlt)"
+
+#: class-wccsc-helpers.php:18
+msgid "On hold"
+msgstr "In Wartestellung"
+
+#: class-wccsc-helpers.php:20
+msgid "Completed"
+msgstr "Abgeschlossen"
+
+#: class-wccsc-helpers.php:22
+msgid "Cancelled"
+msgstr "Abgebrochen"
+
+#: class-wccsc-helpers.php:24
+msgid "Refunded"
+msgstr "Erstattet"
+
+#: class-wccsc-helpers.php:26
+msgid "Failed"
+msgstr "Fehlerhaft"
+
+#: class-wccsc-helpers.php:28
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: class-wccsc-helpers.php:30
+msgid "Overpaid"
+msgstr "Überzahlt"

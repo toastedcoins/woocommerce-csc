@@ -1,35 +1,35 @@
-# WooCommerce XRP
+# WooCommerce CSC
 
-A payment gateway for [WooCommerce](https://woocommerce.com/) to easily accept [XRP](https://ripple.com/xrp) as a payment method.
+A payment gateway for [WooCommerce](https://woocommerce.com/) to easily accept [CSC](https://ripple.com/csc) as a payment method.
 
 ## Requirements
 
 * [PHP](https://php.net) 5.6 or greater (PHP 7.2 or higher is recommended)
 * [WordPress](https://wordpress.org/) 5.1 or greater
 * [WooCommerce](https://woocommerce.com/) 3.5.6 or greater
-* A "self-owned" and **activated** [XRP](https://ripple.com/xrp) account. (You may **not** use an Exchange!)
-* You need an account at [XRPL Webhook](https://webhook.xrpayments.co) (see below)
+* A "self-owned" and **activated** [CSC](https://casinocoin.org/) account. (You may **not** use an Exchange!)
+* You need an account at [CSCL Webhook](https://webhook.casinocoin.eu) (see below)
 
 ## Installing
 
-1. Upload the plugin to the `/wp-content/plugins/woocommerce-xrp` directory folder, or install the plugin through the WordPress plugin screen directly.
+1. Upload the plugin to the `/wp-content/plugins/woocommerce-csc` directory folder, or install the plugin through the WordPress plugin screen directly.
 1. Activate the plugin through the `Plugins` screen in Wordpress.
-1. Create a free account at [XRPL Webhook](https://webhook.xrpayments.co) and obtain your **API keys**. This is required as the plugin uses this webhook to update the checkout page whenever a payment is made.
+1. Create a free account at [CSCL Webhook](https://webhook.casinocoin.eu) and obtain your **API keys**. This is required as the plugin uses this webhook to update the checkout page whenever a payment is made.
 1. Go to "WooCommerce -> Settings -> Payments" and configure the plugin.
 
 ## FAQ ##
 
-### Which XRP server (rippled) is used by default?
+### Which CSC server (rippled) is used by default?
 
-The node **s2.ripple.com** is being used to talk to the XRP network. This can easily be changed under *Advanced* and you can use any public XRP server.
+The node **ws01.casinocoin.org** is being used to talk to the CSC network. This can easily be changed under *Advanced* and you can use any public CSC server.
 
-### What is XRPL Webhooks?
+### What is CSCL Webhooks?
 
-XRPL Webhooks is a free service that send HTTP requests to a specified URL each time a transaction is made to a specific XRP account. The plugin use this service to update the order in real-time when the customer makes a payment.
+CSCL Webhooks is a free service that send HTTP requests to a specified URL each time a transaction is made to a specific CSC account. The plugin use this service to update the order in real-time when the customer makes a payment.
 
 ### Which exchanges is supported?
 
-You can use the [decentralized exchange (DEX)](https://developers.ripple.com/decentralized-exchange.html) on the XRP Ledger, [Binance](https://www.binance.com/), [Bitbank](https://bitbank.cc/), [Bitfinex](https://www.bitfinex.com/), [Bitlish](https://bitlish.com/), [BitMEX](https://www.bitmex.com/), [Bitrue](https://www.bitrue.com/), [Bitsane](https://bitsane.com/), [Bitstamp](https://www.bitstamp.net/), [Bittrex](https://www.bittrex.com), [Bitcoin Exchange Thailand](https://bx.in.th/), [CEX.IO](https://cex.io/), [Coinbase](https://www.coinbase.com/), [Kraken](https://www.kraken.com/) or [Uphold](https://uphold.com/) as the exchange to get the XRP rate when your customer is checking out.
+Currently no exchange is supported
 
 ### Which base currencies are supported?
 
@@ -37,7 +37,7 @@ The supported currencies are AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, EUR, GBP, H
 
 ### What does the bypass firewall feature do?
 
-By default, we speak [JSON-RPC](https://en.wikipedia.org/wiki/JSON#JSON-RPC) on port 51234 with the XRP server. Some webservers are behind a firewall that doesn't allow outgoing traffic on non-standard ports. By enabling this feature, we talk to [cors-anywhere.herokuapp.com](https://cors-anywhere.herokuapp.com/), using TLS on port 443, which then acts as a proxy and relays the traffic to the XRP server.
+By default, we speak [JSON-RPC](https://en.wikipedia.org/wiki/JSON#JSON-RPC) on port 51234 with the CSC server. Some webservers are behind a firewall that doesn't allow outgoing traffic on non-standard ports. By enabling this feature, we talk to [cors-anywhere.herokuapp.com](https://cors-anywhere.herokuapp.com/), using TLS on port 443, which then acts as a proxy and relays the traffic to the CSC server.
 
 ## Changelog
 
@@ -51,12 +51,12 @@ By default, we speak [JSON-RPC](https://en.wikipedia.org/wiki/JSON#JSON-RPC) on 
 * Add new order status (Overpaid) for when a customer pays too much.
 * Fix potential rounding error when processing payments.
 * Fix a bug where the payment gateway was loaded twice.
-* Add so the webhook try again if we're unable to talk to the XRP node.
+* Add so the webhook try again if we're unable to talk to the CSC node.
 
 ### 1.1.0
 * Remove the use of Google Chart to generate the QR-code. Use [qrcodejs](https://github.com/davidshimjs/qrcodejs) instead.
 * Change to a singleton layout to avoid conflicting with other plugins.
-* Add check to ensure that the specified XRP account is activated.
+* Add check to ensure that the specified CSC account is activated.
 * Add a new exchange. ([Bitrue](https://www.bitrue.com/))
 * Fix a bug which prevents us from running on 32bit systems.
 
@@ -79,7 +79,7 @@ By default, we speak [JSON-RPC](https://en.wikipedia.org/wiki/JSON#JSON-RPC) on 
 
 ## License
 
-Please see [LICENSE](https://github.com/empatogen/woocommerce-xrp/blob/master/LICENSE).
+Please see [LICENSE](https://github.com/empatogen/woocommerce-csc/blob/master/LICENSE).
 
 ## Acknowledgments
 
@@ -90,4 +90,4 @@ Please see [LICENSE](https://github.com/empatogen/woocommerce-xrp/blob/master/LI
 
 ## Donate
 
-If you like this plugin and wish to donate, feel free to send some [XRP](https://ripple.com/xrp) to **rscKqdNj1ECXamMoxxwejTnBmhwTpBvTKz**.
+If you like this plugin and wish to donate, feel free to send Jesper Wallin some [XRP](https://ripple.com/xrp) to **rscKqdNj1ECXamMoxxwejTnBmhwTpBvTKz**.

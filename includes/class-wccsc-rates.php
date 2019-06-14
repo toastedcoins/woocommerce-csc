@@ -1,6 +1,6 @@
 <?php
 
-class WCXRP_Rates
+class WCCSC_Rates
 {
     private $ecb_cache = 'woo_ecb_rates.xml';
     private $ledger = false;
@@ -137,15 +137,15 @@ class WCXRP_Rates
     }
 
     /**
-     * Get XRP exchange rate
+     * Get CSC exchange rate
      * @param $exchange
      * @param array $exchanges
      * @return bool|float|int
      */
     public function get_rate($exchange, array $exchanges)
     {
-        /* don't bother if we're using XRP as base currency */
-        if ($this->base_currency === 'XRP') {
+        /* don't bother if we're using CSC as base currency */
+        if ($this->base_currency === 'CSC') {
             return 1;
         }
 
@@ -179,10 +179,10 @@ class WCXRP_Rates
     private function bitstamp()
     {
         if ($this->base_currency === 'USD') {
-            $url = 'https://www.bitstamp.net/api/v2/ticker/xrpusd/';
+            $url = 'https://www.bitstamp.net/api/v2/ticker/cscusd/';
             $src = 'USD';
         } else {
-            $url = 'https://www.bitstamp.net/api/v2/ticker/xrpeur/';
+            $url = 'https://www.bitstamp.net/api/v2/ticker/csceur/';
             $src = 'EUR';
         }
         $res = wp_remote_get($url);
@@ -203,10 +203,10 @@ class WCXRP_Rates
     private function kraken()
     {
         if ($this->base_currency === 'USD') {
-            $url = 'https://api.kraken.com/0/public/Ticker?pair=XRPUSD';
+            $url = 'https://api.kraken.com/0/public/Ticker?pair=CSCUSD';
             $src = 'USD';
         } else {
-            $url = 'https://api.kraken.com/0/public/Ticker?pair=XRPEUR';
+            $url = 'https://api.kraken.com/0/public/Ticker?pair=CSCEUR';
             $src = 'EUR';
         }
         $res = wp_remote_get($url);
@@ -232,7 +232,7 @@ class WCXRP_Rates
      */
     private function bitfinex()
     {
-        $res = wp_remote_get('https://api.bitfinex.com/v1/pubticker/xrpusd');
+        $res = wp_remote_get('https://api.bitfinex.com/v1/pubticker/cscusd');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -249,7 +249,7 @@ class WCXRP_Rates
      */
     private function bittrex()
     {
-        $res = wp_remote_get('https://api.bittrex.com/api/v1.1/public/getticker?market=USD-XRP');
+        $res = wp_remote_get('https://api.bittrex.com/api/v1.1/public/getticker?market=USD-CSC');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -275,7 +275,7 @@ class WCXRP_Rates
         }
         $btc = $rate[0]->price;
 
-        $res = wp_remote_get('https://www.bitmex.com/api/v1/orderBook/L2?symbol=xrp&depth=1');
+        $res = wp_remote_get('https://www.bitmex.com/api/v1/orderBook/L2?symbol=csc&depth=1');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -292,7 +292,7 @@ class WCXRP_Rates
      */
     private function binance()
     {
-        $res = wp_remote_get('https://api.binance.com/api/v3/ticker/price?symbol=XRPUSDT');
+        $res = wp_remote_get('https://api.binance.com/api/v3/ticker/price?symbol=CSCUSDT');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -320,7 +320,7 @@ class WCXRP_Rates
         /* ugly? */
         foreach ($rate as $r) {
             if ($r->primary_currency === 'THB' &&
-            $r->secondary_currency === 'XRP') {
+            $r->secondary_currency === 'CSC') {
                 $rate = $r->last_price;
                 break;
             }
@@ -344,10 +344,10 @@ class WCXRP_Rates
         }
 
         if ($this->base_currency === 'GBP') {
-            $rate = $rate->xrpgbp->last;
+            $rate = $rate->cscgbp->last;
             $src = 'GBP';
         } else {
-            $rate = $rate->xrpeur->last;
+            $rate = $rate->csceur->last;
             $src = 'EUR';
         }
 
@@ -360,7 +360,7 @@ class WCXRP_Rates
      */
     private function bitbank()
     {
-        $res = wp_remote_get('https://public.bitbank.cc/xrp_jpy/ticker');
+        $res = wp_remote_get('https://public.bitbank.cc/csc_jpy/ticker');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -377,7 +377,7 @@ class WCXRP_Rates
      */
     private function bitrue()
     {
-        $res = wp_remote_get('https://www.bitrue.com/kline-api/publicXRP.json?command=returnTicker');
+        $res = wp_remote_get('https://www.bitrue.com/kline-api/publicCSC.json?command=returnTicker');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -385,7 +385,7 @@ class WCXRP_Rates
             return false;
         }
 
-        return $this->to_base($rate->data->XRP_USDT->last, 'USD');
+        return $this->to_base($rate->data->CSC_USDT->last, 'USD');
     }
 
     /**
@@ -395,10 +395,10 @@ class WCXRP_Rates
     private function cexio()
     {
         if ($this->base_currency === 'USD') {
-            $url = 'https://cex.io/api/ticker/XRP/USD';
+            $url = 'https://cex.io/api/ticker/CSC/USD';
             $src = 'USD';
         } else {
-            $url = 'https://cex.io/api/ticker/XRP/EUR';
+            $url = 'https://cex.io/api/ticker/CSC/EUR';
             $src = 'EUR';
         }
         $res = wp_remote_get($url);
@@ -419,10 +419,10 @@ class WCXRP_Rates
     private function uphold()
     {
         if ($this->base_currency === 'USD') {
-            $url = 'https://api.uphold.com/v0/ticker/XRPUSD';
+            $url = 'https://api.uphold.com/v0/ticker/CSCUSD';
             $src = 'USD';
         } else {
-            $url = 'https://api.uphold.com/v0/ticker/XRPEUR';
+            $url = 'https://api.uphold.com/v0/ticker/CSCEUR';
             $src = 'EUR';
         }
         $res = wp_remote_get($url);
@@ -443,10 +443,10 @@ class WCXRP_Rates
     private function coinbase()
     {
         if ($this->base_currency === 'USD') {
-            $url = 'https://api.coinbase.com/v2/prices/XRP-USD/buy';
+            $url = 'https://api.coinbase.com/v2/prices/CSC-USD/buy';
             $src = 'USD';
         } else {
-            $url = 'https://api.coinbase.com/v2/prices/XRP-EUR/buy';
+            $url = 'https://api.coinbase.com/v2/prices/CSC-EUR/buy';
             $src = 'EUR';
         }
         $res = wp_remote_get($url);
@@ -467,10 +467,10 @@ class WCXRP_Rates
     private function bitsane()
     {
         if ($this->base_currency === 'USD') {
-            $url = 'https://bitsane.com/api/public/ticker?pairs=XRP_USD';
+            $url = 'https://bitsane.com/api/public/ticker?pairs=CSC_USD';
             $src = 'USD';
         } else {
-            $url = 'https://bitsane.com/api/public/ticker?pairs=XRP_EUR';
+            $url = 'https://bitsane.com/api/public/ticker?pairs=CSC_EUR';
             $src = 'EUR';
         }
         $res = wp_remote_get($url);
@@ -482,9 +482,9 @@ class WCXRP_Rates
         }
 
         if ($src === 'USD') {
-            return $this->to_base($rate->XRP_USD->last, $src);
+            return $this->to_base($rate->CSC_USD->last, $src);
         } else {
-            return $this->to_base($rate->XRP_EUR->last, $src);
+            return $this->to_base($rate->CSC_EUR->last, $src);
         }
     }
 

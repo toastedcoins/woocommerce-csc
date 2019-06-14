@@ -1,6 +1,6 @@
 <?php
 
-class WCXRP_Ledger
+class WCCSC_Ledger
 {
     private $node = false;
     private $headers = [];
@@ -13,7 +13,7 @@ class WCXRP_Ledger
     function __construct($node, $proxy=null)
     {
         if (empty($node)) {
-            $node = 'https://s2.ripple.com:51234';
+            $node = 'https://ws01.casinocoin.org:4443';
         }
 
         if ($proxy === 'yes') {
@@ -25,7 +25,7 @@ class WCXRP_Ledger
     }
 
     /**
-     * Send an account_tx request to the specify rippled node.
+     * Send an account_tx request to the specify casinocoind node.
      * @param $account
      * @param $limit
      * @return bool|object
@@ -57,7 +57,7 @@ class WCXRP_Ledger
     }
 
     /**
-     * Send an account_info request to the specify rippled node.
+     * Send an account_info request to the specify casinocoind node.
      * @param $account
      * @return bool
      */
@@ -100,7 +100,7 @@ class WCXRP_Ledger
             'params' => [[
                 'taker' => $account,
                 "taker_gets" => [
-                    "currency" => "XRP"
+                    "currency" => "CSC"
                 ],
                 "taker_pays" => $taker_pays,
                 "limit" => 50
