@@ -264,7 +264,7 @@ class WC_Gateway_CSC extends \WC_Payment_Gateway
                 'type'        => 'select',
                 'description' => __('Which exchange to use when fetching the CSC rate.', 'wc-gateway-csc'),
                 'options'     => $this->exchanges,
-                'default'     => 'bitstamp',
+                'default'     => 'bitrue',
                 'desc_tip'    => true
             ],
             'tx_limit' => [
