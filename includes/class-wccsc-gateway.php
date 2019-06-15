@@ -304,8 +304,8 @@ class WC_Gateway_CSC extends \WC_Payment_Gateway
             return false;
         }
 
-        /* round to our advantage with 6 decimals */
-        $csc = round(ceil(($order->get_total() / $rate) * 1000000) / 1000000, 6);
+        /* round to our advantage with 8 decimals */
+        $csc = round(ceil(($order->get_total() / $rate) * 100000000) / 100000000, 8);
 
         /* check if php is 32bit or 64bit */
         if (PHP_INT_SIZE === 4) {
