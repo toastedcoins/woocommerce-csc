@@ -13,7 +13,7 @@ class WCCSC_Ledger
     function __construct($node, $proxy=null)
     {
         if (empty($node)) {
-            $node = 'https://ws01.casinocoin.org:4443';
+            $node = 'https://csc-node-de-a.casinocoin.eu:5005';
         }
 
         if ($proxy === 'yes') {
