@@ -154,7 +154,7 @@ class WCCSC_Rates
         method_exists(get_class($this), $exchange)) {
             $rate = $this->$exchange();
         } else {
-            $rate = $this->bitstamp();
+            $rate = $this->bitrue();
         }
 
         /* return the rate, if we got one */
@@ -172,20 +172,10 @@ class WCCSC_Rates
         return false;
     }
 
-    /**
-     * Get Exchange rate from bitstamp
-     * @return bool|float|int
-     */
-    private function bitstamp()
+
+    private function getBitcoinPrice()
     {
-        if ($this->base_currency === 'USD') {
-            $url = 'https://www.bitstamp.net/api/v2/ticker/cscusd/';
-            $src = 'USD';
-        } else {
-            $url = 'https://www.bitstamp.net/api/v2/ticker/csceur/';
-            $src = 'EUR';
-        }
-        $res = wp_remote_get($url);
+        $res = wp_remote_get('https://api.coindesk.com/v1/bpi/currentprice.json');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -193,183 +183,9 @@ class WCCSC_Rates
             return false;
         }
 
-        return $this->to_base($rate->last, $src);
+        return $rate->bpi->USD->rate_float;
     }
 
-    /**
-     * Get Exchange rate from kraken
-     * @return bool|float|int
-     */
-    private function kraken()
-    {
-        if ($this->base_currency === 'USD') {
-            $url = 'https://api.kraken.com/0/public/Ticker?pair=CSCUSD';
-            $src = 'USD';
-        } else {
-            $url = 'https://api.kraken.com/0/public/Ticker?pair=CSCEUR';
-            $src = 'EUR';
-        }
-        $res = wp_remote_get($url);
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        /* ugly? */
-        foreach ($rate->result as $rate) {
-            $rate = (float)$rate->c[0];
-            break;
-        };
-
-        return $this->to_base($rate, $src);
-    }
-
-    /**
-     * Get Exchange rate from bitfinex
-     * @return bool|float|int
-     */
-    private function bitfinex()
-    {
-        $res = wp_remote_get('https://api.bitfinex.com/v1/pubticker/cscusd');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->last_price, 'USD');
-    }
-
-    /**
-     * Get Exchange rate from bittrex
-     * @return bool|float|int
-     */
-    private function bittrex()
-    {
-        $res = wp_remote_get('https://api.bittrex.com/api/v1.1/public/getticker?market=USD-CSC');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->result->Last, 'USD');
-    }
-
-    /**
-     * Get Exchange rate from bitmex
-     * @return bool|float|int
-     */
-    private function bitmex()
-    {
-        $res = wp_remote_get('https://www.bitmex.com/api/v1/orderBook/L2?symbol=xbt&depth=1');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-        $btc = $rate[0]->price;
-
-        $res = wp_remote_get('https://www.bitmex.com/api/v1/orderBook/L2?symbol=csc&depth=1');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base(($btc * $rate[0]->price), 'USD');
-    }
-
-    /**
-     * Get Exchange rate from binance
-     * @return bool|float|int
-     */
-    private function binance()
-    {
-        $res = wp_remote_get('https://api.binance.com/api/v3/ticker/price?symbol=CSCUSDT');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->price, 'USD');
-    }
-
-    /**
-     * Get Exchange rate from bx.in
-     * @return bool|float|int
-     */
-    private function bxinth()
-    {
-        $res = wp_remote_get('https://bx.in.th/api/');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        /* ugly? */
-        foreach ($rate as $r) {
-            if ($r->primary_currency === 'THB' &&
-            $r->secondary_currency === 'CSC') {
-                $rate = $r->last_price;
-                break;
-            }
-        }
-
-        return $this->to_base($rate, 'THB');
-    }
-
-    /**
-     * Get Exchange rate from bitlish
-     * @return bool|float|int
-     */
-    private function bitlish()
-    {
-        $res = wp_remote_get('https://bitlish.com/api/v1/tickers');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        if ($this->base_currency === 'GBP') {
-            $rate = $rate->cscgbp->last;
-            $src = 'GBP';
-        } else {
-            $rate = $rate->csceur->last;
-            $src = 'EUR';
-        }
-
-        return $this->to_base($rate, $src);
-    }
-
-    /**
-     * Get Exchange rate from bitbank
-     * @return bool|float|int
-     */
-    private function bitbank()
-    {
-        $res = wp_remote_get('https://public.bitbank.cc/csc_jpy/ticker');
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->data->last, 'JPY');
-    }
 
     /**
      * Get Exchange rate from bitrue
@@ -377,7 +193,7 @@ class WCCSC_Rates
      */
     private function bitrue()
     {
-        $res = wp_remote_get('https://www.bitrue.com/kline-api/publicCSC.json?command=returnTicker');
+        $res = wp_remote_get('https://www.bitrue.com/kline-api/public.json?command=returnTicker');
         if (is_wp_error($res) || $res['response']['code'] !== 200) {
             return false;
         }
@@ -385,129 +201,7 @@ class WCCSC_Rates
             return false;
         }
 
-        return $this->to_base($rate->data->CSC_USDT->last, 'USD');
+        return $this->to_base((float) ($rate->data->CSC_BTC->last * $this->getBitcoinPrice()), 'USD');
     }
 
-    /**
-     * Get Exchange rate from cexio
-     * @return bool|float|int
-     */
-    private function cexio()
-    {
-        if ($this->base_currency === 'USD') {
-            $url = 'https://cex.io/api/ticker/CSC/USD';
-            $src = 'USD';
-        } else {
-            $url = 'https://cex.io/api/ticker/CSC/EUR';
-            $src = 'EUR';
-        }
-        $res = wp_remote_get($url);
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->last, $src);
-    }
-
-    /**
-     * Get Exchange rate from uphold
-     * @return bool|float|int
-     */
-    private function uphold()
-    {
-        if ($this->base_currency === 'USD') {
-            $url = 'https://api.uphold.com/v0/ticker/CSCUSD';
-            $src = 'USD';
-        } else {
-            $url = 'https://api.uphold.com/v0/ticker/CSCEUR';
-            $src = 'EUR';
-        }
-        $res = wp_remote_get($url);
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->ask, $src);
-    }
-
-    /**
-     * Get Exchange rate from coinbase
-     * @return bool|float|int
-     */
-    private function coinbase()
-    {
-        if ($this->base_currency === 'USD') {
-            $url = 'https://api.coinbase.com/v2/prices/CSC-USD/buy';
-            $src = 'USD';
-        } else {
-            $url = 'https://api.coinbase.com/v2/prices/CSC-EUR/buy';
-            $src = 'EUR';
-        }
-        $res = wp_remote_get($url);
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        return $this->to_base($rate->amount, $src);
-    }
-
-    /**
-     * Get Exchange rate from bitsane
-     * @return bool|float|int
-     */
-    private function bitsane()
-    {
-        if ($this->base_currency === 'USD') {
-            $url = 'https://bitsane.com/api/public/ticker?pairs=CSC_USD';
-            $src = 'USD';
-        } else {
-            $url = 'https://bitsane.com/api/public/ticker?pairs=CSC_EUR';
-            $src = 'EUR';
-        }
-        $res = wp_remote_get($url);
-        if (is_wp_error($res) || $res['response']['code'] !== 200) {
-            return false;
-        }
-        if (($rate = json_decode($res['body'])) === null) {
-            return false;
-        }
-
-        if ($src === 'USD') {
-            return $this->to_base($rate->CSC_USD->last, $src);
-        } else {
-            return $this->to_base($rate->CSC_EUR->last, $src);
-        }
-    }
-
-    /**
-     * Get Exchange rate from dex
-     * @return bool|float|int
-     */
-    private function dex()
-    {
-        $src = 'EUR';
-
-        if ($this->base_currency === 'USD') {
-            $src = 'USD';
-        }
-        $rate = $this->ledger->book_offers(
-            $this->account,
-            $src
-        );
-
-        if ($rate === false) {
-            return false;
-        }
-
-        return $this->to_base($rate, $src);
-    }
 }

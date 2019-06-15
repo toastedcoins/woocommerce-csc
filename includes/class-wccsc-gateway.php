@@ -29,10 +29,10 @@ class WC_Gateway_CSC extends \WC_Payment_Gateway
 
         /* supported exchanges */
         $this->exchanges = [
-            'nlexch'  => 'NLExch.com',
-            'nuex'  => 'nuex.com',
+//            'nlexch'  => 'NLExch.com',
+//            'nuex'  => 'nuex.com',
             'bitrue'  => 'bitrue.com',
-            'stex'  => 'stex.com',
+//            'stex'  => 'stex.com',
 
         ];
 
