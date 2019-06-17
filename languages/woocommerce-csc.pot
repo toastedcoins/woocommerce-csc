@@ -27,11 +27,11 @@ msgid "A payment gateway for WooCommerce to accept <a href=\"https://ripple.com/
 msgstr ""
 
 #. Author of the plugin
-msgid "Jesper Wallin"
+msgid "Original author Jesper Wallin, rebranded to CSC by Wenusch"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://ifconfig.se/"
+msgid "https://webhook.casinocoin.eu/"
 msgstr ""
 
 #: woocommerce-csc.php:60
@@ -110,7 +110,7 @@ msgid "API Key"
 msgstr ""
 
 #: woocommerce-csc.php:234
-msgid "Your CSCL CSCayments Webhook API key."
+msgid "Your CSCL Payments Webhook API key."
 msgstr ""
 
 #: woocommerce-csc.php:240
@@ -118,7 +118,7 @@ msgid "API Secret"
 msgstr ""
 
 #: woocommerce-csc.php:242
-msgid "Your CSCL CSCayments Webhook API secret."
+msgid "Your CSCL Payments Webhook API secret."
 msgstr ""
 
 #: woocommerce-csc.php:248
